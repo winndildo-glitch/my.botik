@@ -1,7 +1,8 @@
 import telebot
+import os
 from telebot import types
 
-TOKEN = "BOT_TOKEN"
+TOKEN = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
@@ -15,8 +16,7 @@ def start(message):
 @bot.message_handler(func=lambda message: message.text == "🌿 Показать реквизиты")
 def req(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn = types.KeyboardButton("⬅️ Назад")
-    markup.add(btn)
+    markup.add(types.KeyboardButton("⬅️ Назад"))
 
     bot.send_message(
         message.chat.id,
